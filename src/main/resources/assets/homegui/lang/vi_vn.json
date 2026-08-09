@@ -1,6 +1,5 @@
 {
 	"homegui.message.prefix": "&#3498dbHᴏᴍᴇGᴜɪ &8⏩ &r",
-
 	"homegui.message.home_set": "Đã đặt home &a%s&r. &8(&f%s&8/&f%s&8)",
 	"homegui.message.home_deleted": "Đã xoá home &a%s&r.",
 	"homegui.message.home_renamed": "Đã đổi tên &a%s&r thành &a%s&r.",
@@ -9,8 +8,8 @@
 	"homegui.message.home_already_exists": "&#FF4444Home &f%s&#FF4444 đã tồn tại.",
 	"homegui.message.limit_reached": "&#FF4444Bạn đã đạt tối đa &f%s&#FF4444 home.",
 	"homegui.message.cooldown": "&#F0C857Vui lòng đợi thêm &f%s&#F0C857 giây.",
-	"homegui.message.warmup_started": "&#F0C857Đứng yên để dịch chuyển về &f%s&#F0C857.",
-	"homegui.message.warmup_countdown": "&#F0C857Dịch chuyển sau &f%s&#F0C857...",
+	"homegui.message.warmup_started": "&#55DDFFĐứng yên để dịch chuyển về &f%s&#55DDFF.",
+	"homegui.message.warmup_countdown": "&#55DDFFDịch chuyển sau &f%s",
 	"homegui.message.warmup_cancelled": "&#FF4444Đã huỷ dịch chuyển vì bạn di chuyển.",
 	"homegui.message.cross_dimension_denied": "&#FF4444Không thể dịch chuyển sang thế giới khác.",
 	"homegui.message.invalid_name": "&#FF4444Tên home không hợp lệ. Dùng 1 tới &f%s&#FF4444 ký tự hiển thị.",
@@ -27,6 +26,7 @@
 	"homegui.gui.rename_tooltip": "Đổi tên nhà này",
 	"homegui.gui.rename_hint": "Đang sửa \"%s\". Nhập tên mới bên dưới rồi bấm Đổi tên.",
 	"homegui.gui.rename_confirm": "Đổi tên",
+	"homegui.gui.open_tooltip": "Mở danh sách nhà",
 	"homegui.gui.delete": "X",
 	"homegui.gui.delete_tooltip": "Xoá nhà này",
 	"homegui.gui.delete_hint": "Bấm X lần nữa để xoá \"%s\".",
@@ -35,6 +35,8 @@
 	"homegui.gui.close": "Đóng",
 	"homegui.gui.previous_page": "<",
 	"homegui.gui.next_page": ">",
+
+	"key.homegui.open": "Mở danh sách nhà",
 
 	"homegui.config.title": "Cài đặt HomeGUI",
 	"homegui.config.note": "Đây là file config của riêng bạn. Server luôn dùng bản của server.",
@@ -57,6 +59,8 @@
 	"homegui.config.max_home_name_length": "Độ dài tên tối đa",
 	"homegui.config.gui_entries_per_page": "Số dòng mỗi trang",
 	"homegui.config.open_gui_on_bare_home_command": "/home mở GUI",
+	"homegui.config.show_message_prefix": "Tiền tố tin nhắn",
+	"homegui.config.show_inventory_button": "Nút trong túi đồ",
 	"homegui.config.warmup_tick_sound": "Âm đếm ngược",
 	"homegui.config.warmup_tick_sound_volume": "Âm lượng đếm",
 	"homegui.config.warmup_tick_sound_pitch": "Cao độ đếm",

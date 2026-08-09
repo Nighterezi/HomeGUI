@@ -46,7 +46,8 @@ Mặc định `0`, tức là tắt. Thời gian người chơi phải chờ gi�
 
 ### teleportWarmupSeconds
 
-Mặc định `0`, tức là tắt. Đếm ngược trước khi dịch chuyển, hiển thị trên action bar.
+Mặc định `3`. Đếm ngược trước khi dịch chuyển, hiển thị trên action bar. Đặt `0` để dịch chuyển
+ngay lập tức.
 
 ### cancelWarmupOnMove
 
@@ -71,6 +72,31 @@ Mặc định `6`, tối đa `10`. Mỗi trang màn hình hiện bao nhiêu home
 
 Mặc định `true`. `/home` không kèm tên có mở màn hình hay không. Khi tắt, `/home` luôn đưa về home
 mặc định.
+
+## Tin nhắn
+
+### showMessagePrefix
+
+Mặc định `false`. Tin nhắn trong chat có kèm tên mod ở đầu dòng hay không.
+
+Tắt thì chat gọn gàng, thường là điều bạn muốn trên server nơi người chơi gõ `/home` liên tục.
+Dòng đếm ngược trên action bar không bao giờ có tiền tố, dù bật hay tắt, vì chỗ đó quá hẹp.
+
+Bản thân tiền tố là một key dịch bình thường, `homegui.message.prefix`, nên bạn đổi được chữ và
+màu riêng cho từng ngôn ngữ. Xem [Bản dịch](/vi/docs/translations).
+
+## Giao diện của riêng bạn
+
+### showInventoryButton
+
+Mặc định `false`. Có thêm nút hình ngôi nhà cạnh túi đồ hay không. Mặc định tắt để mod không tự ý
+đổi giao diện túi đồ của bạn.
+
+Tuỳ chọn này được đọc từ file config của bạn chứ không phải của server. Xem
+[Mở màn hình](/vi/docs/opening-the-screen).
+
+Không có tuỳ chọn nào cho phím mở nhanh, vì nó nằm trong **Options > Controls** cùng với mọi phím
+khác. Xoá phím ở đó là tắt.
 
 ## OP
 

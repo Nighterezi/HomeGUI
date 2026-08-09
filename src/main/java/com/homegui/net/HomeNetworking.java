@@ -46,6 +46,7 @@ public final class HomeNetworking {
 				HomeService.renameHome(player, payload.home(), payload.argument());
 				HomeService.sendHomeList(player);
 			}
+			case HomeActionPayload.OPEN -> HomeService.openGui(player);
 			case HomeActionPayload.REFRESH -> HomeService.sendHomeList(player);
 			default -> {
 				// Unknown action, ignore it.

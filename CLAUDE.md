@@ -77,6 +77,7 @@ next one, so there is no client state to keep in sync.
 | Task | Location |
 |---|---|
 | Add or change a command | [command/HomeCommands.java](src/main/java/com/homegui/command/HomeCommands.java) |
+| The key mapping or the inventory button | [client/HomeKeybind.java](src/client/java/com/homegui/client/HomeKeybind.java), [client/InventoryButton.java](src/client/java/com/homegui/client/InventoryButton.java) |
 | Any rule about homes: limits, cooldown, warmup, validation | [HomeService.java](src/main/java/com/homegui/HomeService.java) |
 | Reading or writing home files | [data/HomeManager.java](src/main/java/com/homegui/data/HomeManager.java) |
 | The shape of a saved home | [data/Home.java](src/main/java/com/homegui/data/Home.java) |
@@ -128,6 +129,14 @@ batching. Do not add a save queue without also handling the disconnect and shutd
 **Adding a config option means four edits.** The field in `HomeGuiConfig`, clamping in
 `sanitize()` if it has a valid range, a `Lang` key plus both language files for the label, and a
 row in `ConfigScreen.buildOptions()`. Miss the last one and the option is invisible in game.
+
+**A key mapping is not a config option.** The Open Homes key is registered with
+`KeyMappingHelper` and appears in Options, Controls; clearing the binding there is how a player
+turns it off. Do not add a config field that duplicates a control the game already owns.
+
+**One config option is client only.** `showInventoryButton` is read by whichever side is
+running the interface, which on multiplayer is the player's own file. Everything else is a server
+decision. Do not read a client-only option from `src/main` code that runs on a server.
 
 ## Conventions
 

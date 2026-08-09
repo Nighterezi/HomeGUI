@@ -51,7 +51,7 @@ public class HomeScreen extends Screen {
 	/** Pencil icons stitched into the GUI atlas from assets/homegui/textures/gui/sprites. */
 	private static final Identifier PENCIL_SPRITE = HomeGui.id("icon/pencil");
 	private static final Identifier PENCIL_ACTIVE_SPRITE = HomeGui.id("icon/pencil_active");
-	private static final int ICON_SIZE = 10;
+	private static final int ICON_SIZE = 16;
 
 	private static final int COLOR_PANEL = 0xB0101018;
 	private static final int COLOR_TITLE = 0xFFFFFFFF;

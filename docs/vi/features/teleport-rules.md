@@ -1,7 +1,7 @@
 # Luật dịch chuyển
 
-Mặc định gần như không có luật nào ngoài giới hạn số home: `/home` là dịch chuyển ngay. Mọi thứ
-trong trang này đều phải tự bật.
+Mặc định có hai luật: bạn được giữ ba home, và mỗi lần dịch chuyển phải đứng yên ba giây trước.
+Những thứ còn lại trong trang này đều phải tự bật.
 
 ## Được bao nhiêu home
 
@@ -20,7 +20,8 @@ ngược không bị tính vào đó.
 
 ## Đếm ngược
 
-`teleportWarmupSeconds` giữ người chơi đứng yên trước khi dịch chuyển. Số giây còn lại hiện trên
+`teleportWarmupSeconds`, mặc định ba giây, giữ người chơi đứng yên trước khi dịch chuyển. Đặt `0`
+để dịch chuyển ngay khi gõ lệnh. Số giây còn lại hiện trên
 action bar và giảm mỗi giây, kèm một tiếng động mỗi lần.
 
 Khi `cancelWarmupOnMove` bật, đi khỏi chỗ là huỷ. `warmupMoveTolerance` quyết định bao xa thì bị

@@ -1,6 +1,5 @@
 {
 	"homegui.message.prefix": "&#3498dbHᴏᴍᴇGᴜɪ &8⏩ &r",
-
 	"homegui.message.home_set": "Saved home &a%s&r. &8(&f%s&8/&f%s&8)",
 	"homegui.message.home_deleted": "Deleted home &a%s&r.",
 	"homegui.message.home_renamed": "Renamed &a%s&r to &a%s&r.",
@@ -9,8 +8,8 @@
 	"homegui.message.home_already_exists": "&#FF4444Home &f%s&#FF4444 already exists.",
 	"homegui.message.limit_reached": "&#FF4444You have reached your limit of &f%s&#FF4444 homes.",
 	"homegui.message.cooldown": "&#F0C857Please wait &f%s&#F0C857 more seconds.",
-	"homegui.message.warmup_started": "&#F0C857Stand still to teleport to &f%s&#F0C857.",
-	"homegui.message.warmup_countdown": "&#F0C857Teleporting in &f%s&#F0C857...",
+	"homegui.message.warmup_started": "&#55DDFFStand still to teleport to &f%s&#55DDFF.",
+	"homegui.message.warmup_countdown": "&#55DDFFTeleporting in &f%s",
 	"homegui.message.warmup_cancelled": "&#FF4444Teleport cancelled because you moved.",
 	"homegui.message.cross_dimension_denied": "&#FF4444You cannot teleport to another dimension.",
 	"homegui.message.invalid_name": "&#FF4444Invalid home name. Use 1 to &f%s&#FF4444 visible characters.",
@@ -27,6 +26,7 @@
 	"homegui.gui.rename_tooltip": "Rename this home",
 	"homegui.gui.rename_hint": "Editing \"%s\". Type the new name below, then press Rename.",
 	"homegui.gui.rename_confirm": "Rename",
+	"homegui.gui.open_tooltip": "Open your homes",
 	"homegui.gui.delete": "X",
 	"homegui.gui.delete_tooltip": "Delete this home",
 	"homegui.gui.delete_hint": "Press X again to delete \"%s\".",
@@ -35,6 +35,8 @@
 	"homegui.gui.close": "Close",
 	"homegui.gui.previous_page": "<",
 	"homegui.gui.next_page": ">",
+
+	"key.homegui.open": "Open Homes",
 
 	"homegui.config.title": "HomeGUI Settings",
 	"homegui.config.note": "This edits your own config file. A server always uses its own copy.",
@@ -57,6 +59,8 @@
 	"homegui.config.max_home_name_length": "Max name length",
 	"homegui.config.gui_entries_per_page": "Rows per page",
 	"homegui.config.open_gui_on_bare_home_command": "/home opens GUI",
+	"homegui.config.show_message_prefix": "Message prefix",
+	"homegui.config.show_inventory_button": "Inventory button",
 	"homegui.config.warmup_tick_sound": "Tick sound",
 	"homegui.config.warmup_tick_sound_volume": "Tick volume",
 	"homegui.config.warmup_tick_sound_pitch": "Tick pitch",

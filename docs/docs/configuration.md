@@ -47,7 +47,8 @@ Default `0`, which is off. How long a player must wait between teleports.
 
 ### teleportWarmupSeconds
 
-Default `0`, which is off. A countdown before the teleport happens, shown on the action bar.
+Default `3`. A countdown before the teleport happens, shown on the action bar. Set it to `0` to
+teleport instantly.
 
 ### cancelWarmupOnMove
 
@@ -72,6 +73,32 @@ Default `6`, capped at `10`. How many homes fit on one page of the screen.
 
 Default `true`. Whether `/home` with no name opens the screen. With it off, `/home` always goes
 to the default home.
+
+## Messages
+
+### showMessagePrefix
+
+Default `false`. Whether chat messages start with the mod's name.
+
+Off keeps chat clean, which is usually what you want on a server where players use `/home`
+constantly. The countdown on the action bar never carries the prefix either way, because there
+is no room for it.
+
+The prefix itself is a normal translation key, `homegui.message.prefix`, so you can change the
+wording and the colour per language. See [Translations](/docs/translations).
+
+## Your own interface
+
+### showInventoryButton
+
+Default `false`. Whether a house button is added beside your inventory. Off so the mod does not
+change the inventory unless you ask it to.
+
+This one is read from your own config file, not the server's. See
+[Opening the Screen](/docs/opening-the-screen).
+
+There is no setting for the Open Homes key, because it lives in **Options > Controls** with every
+other key mapping. Clear the binding there to turn it off.
 
 ## Operators
 

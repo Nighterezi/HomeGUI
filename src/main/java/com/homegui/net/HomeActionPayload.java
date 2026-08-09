@@ -11,8 +11,8 @@ import net.minecraft.resources.Identifier;
  * Client to server. One action the player triggered from the GUI.
  *
  * @param action   one of {@link #TELEPORT}, {@link #DELETE}, {@link #SET},
- *                 {@link #RENAME} or {@link #REFRESH}
- * @param home     the home the action applies to, empty for {@link #REFRESH}
+ *                 {@link #RENAME}, {@link #OPEN} or {@link #REFRESH}
+ * @param home     the home the action applies to, empty for {@link #OPEN} and {@link #REFRESH}
  * @param argument the new name for {@link #RENAME}, empty otherwise
  */
 public record HomeActionPayload(String action, String home, String argument) implements CustomPacketPayload {
@@ -21,6 +21,8 @@ public record HomeActionPayload(String action, String home, String argument) imp
 	public static final String SET = "set";
 	public static final String RENAME = "rename";
 	public static final String REFRESH = "refresh";
+	/** Asks the server to open the screen, used by the key mapping and the inventory button. */
+	public static final String OPEN = "open";
 
 	/** Generous enough for any name the server would accept, small enough to bound the packet. */
 	private static final int MAX_NAME_BYTES = 256;

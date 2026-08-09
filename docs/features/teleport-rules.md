@@ -1,7 +1,7 @@
 # Teleport Rules
 
-Out of the box there are no rules at all beyond the home limit: `/home` teleports you instantly.
-Everything here is opt in.
+Out of the box there are two: you may keep three homes, and a teleport makes you stand still for
+three seconds first. Everything else here is opt in.
 
 ## How many homes
 
@@ -20,7 +20,8 @@ count against it.
 
 ## Warmup
 
-`teleportWarmupSeconds` holds the player in place before the teleport. The remaining seconds
+`teleportWarmupSeconds`, three seconds by default, holds the player in place before the teleport.
+Set it to `0` to teleport the moment the command is run. The remaining seconds
 appear on the action bar and tick down once a second, with a sound each time.
 
 With `cancelWarmupOnMove` on, walking away cancels it. `warmupMoveTolerance` decides how far is

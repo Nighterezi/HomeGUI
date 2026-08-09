@@ -3,6 +3,7 @@ package com.homegui.lang;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.homegui.HomeGui;
+import com.homegui.config.HomeGuiConfig;
 import com.homegui.util.ColorCodes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -134,6 +135,10 @@ public final class Localization {
 	}
 
 	private static Component prefixed(String language, String key, Object... args) {
+		if (!HomeGuiConfig.get().showMessagePrefix) {
+			return message(language, key, args);
+		}
+
 		return Component.empty()
 				.append(message(language, Lang.PREFIX))
 				.append(message(language, key, args));

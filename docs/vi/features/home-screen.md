@@ -1,6 +1,7 @@
 # Màn hình home
 
-`/home` không kèm tên sẽ mở nó. `/homes` cũng vậy.
+`/home` không kèm tên sẽ mở nó, `/homes` cũng vậy. Nếu client của bạn có cài mod thì còn bấm được phím **H** hoặc nút hình ngôi nhà cạnh túi đồ; xem
+[Mở màn hình](/vi/docs/opening-the-screen).
 
 ## Mỗi home một dòng
 

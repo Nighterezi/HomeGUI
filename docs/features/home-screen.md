@@ -1,6 +1,7 @@
 # Home Screen
 
-`/home` with no name opens it. So does `/homes`.
+`/home` with no name opens it, and so does `/homes`. With the mod on your client you can also press **H** or click the house button beside your inventory; see
+[Opening the Screen](/docs/opening-the-screen).
 
 ## A row per home
 

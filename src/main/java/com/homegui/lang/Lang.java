@@ -34,6 +34,7 @@ public final class Lang {
 	public static final String GUI_RENAME_TOOLTIP = "homegui.gui.rename_tooltip";
 	public static final String GUI_RENAME_HINT = "homegui.gui.rename_hint";
 	public static final String GUI_RENAME_CONFIRM = "homegui.gui.rename_confirm";
+	public static final String GUI_OPEN_TOOLTIP = "homegui.gui.open_tooltip";
 	public static final String GUI_DELETE = "homegui.gui.delete";
 	public static final String GUI_DELETE_TOOLTIP = "homegui.gui.delete_tooltip";
 	public static final String GUI_DELETE_HINT = "homegui.gui.delete_hint";
@@ -45,11 +46,11 @@ public final class Lang {
 
 	public static final String CONFIG_TITLE = "homegui.config.title";
 	public static final String CONFIG_NOTE = "homegui.config.note";
-	public static final String CONFIG_PAGE = "homegui.config.page";
 	public static final String CONFIG_SAVE = "homegui.config.save";
 	public static final String CONFIG_CANCEL = "homegui.config.cancel";
 	public static final String CONFIG_ENABLED = "homegui.config.enabled";
 	public static final String CONFIG_DISABLED = "homegui.config.disabled";
+	public static final String CONFIG_PAGE = "homegui.config.page";
 	public static final String CONFIG_MAX_HOMES = "homegui.config.max_homes";
 	public static final String CONFIG_DEFAULT_HOME_NAME = "homegui.config.default_home_name";
 	public static final String CONFIG_TELEPORT_COOLDOWN = "homegui.config.teleport_cooldown_seconds";
@@ -70,6 +71,11 @@ public final class Lang {
 	public static final String CONFIG_TELEPORT_SOUND = "homegui.config.teleport_sound";
 	public static final String CONFIG_TELEPORT_SOUND_VOLUME = "homegui.config.teleport_sound_volume";
 	public static final String CONFIG_TELEPORT_SOUND_PITCH = "homegui.config.teleport_sound_pitch";
+	public static final String CONFIG_SHOW_MESSAGE_PREFIX = "homegui.config.show_message_prefix";
+	public static final String CONFIG_SHOW_INVENTORY_BUTTON = "homegui.config.show_inventory_button";
+
+	/** Name of the key mapping, shown in Options, Controls. */
+	public static final String KEYBIND_OPEN = "key.homegui.open";
 
 	private Lang() {
 	}

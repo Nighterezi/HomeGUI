@@ -16,6 +16,7 @@ const enManualSidebar = [
     text: 'Server Guide',
     items: [
       { text: 'Commands', link: '/docs/commands' },
+      { text: 'Opening the Screen', link: '/docs/opening-the-screen' },
       { text: 'Permissions', link: '/docs/permissions' },
       { text: 'Storage', link: '/docs/storage' }
     ]
@@ -43,6 +44,7 @@ const viManualSidebar = [
     text: 'Hướng dẫn máy chủ',
     items: [
       { text: 'Lệnh', link: '/vi/docs/commands' },
+      { text: 'Mở màn hình', link: '/vi/docs/opening-the-screen' },
       { text: 'Quyền', link: '/vi/docs/permissions' },
       { text: 'Lưu trữ', link: '/vi/docs/storage' }
     ]

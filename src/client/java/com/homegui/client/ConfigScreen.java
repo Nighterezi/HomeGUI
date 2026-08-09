@@ -24,6 +24,9 @@ import java.util.function.Consumer;
  *
  * <p>Options are laid out in two columns and paged, so adding more of them later does not push
  * the screen past the bottom of the window.
+ *
+ * <p>There is no row for the Open Homes key. That one belongs in Options, Controls with every
+ * other key mapping.
  */
 public class ConfigScreen extends Screen {
 	private static final int COLUMNS = 2;
@@ -36,9 +39,13 @@ public class ConfigScreen extends Screen {
 	private static final int BUTTON_WIDTH = 100;
 	private static final int PAGE_BUTTON_WIDTH = 24;
 	private static final int BUTTON_GAP = 8;
-	private static final int TITLE_HEIGHT = 36;
+	/** Room above the first row: the title, then the page counter under it. */
+	private static final int TITLE_HEIGHT = 44;
+	private static final int TITLE_TEXT_OFFSET = 40;
+	private static final int PAGE_TEXT_OFFSET = 20;
 	private static final int FOOTER_HEIGHT = 56;
 	private static final int TEXT_BASELINE_OFFSET = 6;
+	private static final int MAX_FIELD_LENGTH = 64;
 
 	private static final int COLOR_TITLE = 0xFFFFFFFF;
 	private static final int COLOR_LABEL = 0xFFC8C8C8;
@@ -90,6 +97,11 @@ public class ConfigScreen extends Screen {
 				value -> config.guiEntriesPerPage = value));
 		options.add(new BooleanOption(Lang.CONFIG_OPEN_GUI_ON_BARE_HOME, config.openGuiOnBareHomeCommand,
 				value -> config.openGuiOnBareHomeCommand = value));
+
+		options.add(new BooleanOption(Lang.CONFIG_SHOW_MESSAGE_PREFIX, config.showMessagePrefix,
+				value -> config.showMessagePrefix = value));
+		options.add(new BooleanOption(Lang.CONFIG_SHOW_INVENTORY_BUTTON, config.showInventoryButton,
+				value -> config.showInventoryButton = value));
 
 		options.add(new TextOption(Lang.CONFIG_WARMUP_TICK_SOUND, config.warmupTickSound,
 				value -> config.warmupTickSound = value, true));
@@ -207,7 +219,13 @@ public class ConfigScreen extends Screen {
 		int centerX = this.width / 2;
 
 		graphics.centeredText(this.font, Component.translatable(Lang.CONFIG_TITLE),
-				centerX, contentTop - TITLE_HEIGHT / 2, COLOR_TITLE);
+				centerX, contentTop - TITLE_TEXT_OFFSET, COLOR_TITLE);
+
+		if (pageCount() > 1) {
+			graphics.centeredText(this.font,
+					Component.translatable(Lang.CONFIG_PAGE, page + 1, pageCount()),
+					centerX, contentTop - PAGE_TEXT_OFFSET, COLOR_NOTE);
+		}
 
 		int first = page * pageSize();
 		int last = Math.min(first + pageSize(), options.size());
@@ -223,12 +241,6 @@ public class ConfigScreen extends Screen {
 
 		graphics.centeredText(this.font, Component.translatable(Lang.CONFIG_NOTE),
 				centerX, noteY, COLOR_NOTE);
-
-		if (pageCount() > 1) {
-			graphics.centeredText(this.font,
-					Component.translatable(Lang.CONFIG_PAGE, page + 1, pageCount()),
-					centerX, contentTop - TITLE_HEIGHT / 2 + TEXT_BASELINE_OFFSET * 2, COLOR_NOTE);
-		}
 	}
 
 	// --------------------------------------------------------------- options
@@ -298,8 +310,6 @@ public class ConfigScreen extends Screen {
 			return box;
 		}
 	}
-
-	private static final int MAX_FIELD_LENGTH = 64;
 
 	private static final class TextOption extends FieldOption {
 		private final Consumer<String> setter;

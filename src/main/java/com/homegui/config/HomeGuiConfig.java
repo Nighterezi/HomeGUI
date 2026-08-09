@@ -44,7 +44,7 @@ public class HomeGuiConfig {
 	public int teleportCooldownSeconds = 0;
 
 	/** Seconds the player has to stand still before the teleport happens. 0 teleports instantly. */
-	public int teleportWarmupSeconds = 0;
+	public int teleportWarmupSeconds = 3;
 
 	/** Whether moving during the warmup cancels the teleport. */
 	public boolean cancelWarmupOnMove = true;
@@ -78,6 +78,22 @@ public class HomeGuiConfig {
 
 	/** Whether /home without a name opens the GUI for players who have the mod installed. */
 	public boolean openGuiOnBareHomeCommand = true;
+
+	/**
+	 * Whether chat messages are prefixed with the mod's name. Off by default, so the mod stays
+	 * quiet in chat; the action bar countdown never carries the prefix either way.
+	 */
+	public boolean showMessagePrefix = false;
+
+	/**
+	 * Whether a button that opens the home screen is added next to the inventory. Read by the
+	 * client only: a dedicated server keeps it in its own file, where it does nothing, because
+	 * it describes the player's own interface.
+	 *
+	 * <p>There is no matching option for the Open Homes key. That one lives in Options,
+	 * Controls with every other key, where clearing the binding turns it off.
+	 */
+	public boolean showInventoryButton = false;
 
 	/** Sound id played once per second while the warmup counts down. Leave empty to disable. */
 	public String warmupTickSound = "minecraft:block.note_block.hat";

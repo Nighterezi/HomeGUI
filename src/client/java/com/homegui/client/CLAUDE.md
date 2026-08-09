@@ -4,11 +4,15 @@ Client-only source set. Two screens and the receiver that opens one of them.
 
 | File | What it is |
 |---|---|
-| `HomeGuiClient` | Client entrypoint. Registers one payload receiver, nothing else. |
+| `HomeGuiClient` | Client entrypoint. The payload receiver, the key and the inventory button. |
 | `HomeScreen` | The dialog `/home` opens. |
 | `HomeListData` | The server's JSON payload, unpacked. |
 | `ConfigScreen` | The Mod Menu settings editor. |
 | `HomeGuiModMenu` | The `modmenu` entrypoint. Only Mod Menu ever loads it. |
+| `HomeRequest` | Asks the server to open the screen, guarded by `canSend`. |
+| `HomeKeybind` | The Open Homes key, H by default. |
+| `InventoryButton` | The house button beside the survival inventory. |
+| `mixin/` | One accessor, for the inventory panel position. |
 
 ## The screen owns no state
 
@@ -50,10 +54,15 @@ with the hint line landing on top of Close.
 
 `ConfigScreen` pages at `ROWS_PER_COLUMN * COLUMNS`. Two columns at 224 px is the widest that
 fits a 640 px GUI, which is what most players get at their default scale. Adding options is free
-because it pages; widening the layout is not.
+because it pages; widening the layout is not. The title and the page counter sit at fixed offsets
+above the first row, and they have collided before, so move both together.
 
 Option rows hold their own pending value, so paging away and back does not lose an edit, and
 nothing is written until Save.
+
+There is no row for the Open Homes key. `HomeKeybind` registers it with `KeyMappingHelper`, which
+puts it in Options, Controls, and that screen is where a player turns it off by clearing the
+binding.
 
 ## The pencil icon
 
@@ -64,6 +73,22 @@ under `textures/gui/sprites/` are stitched into the GUI atlas automatically.
 There is a second `pencil_active.png` used while a rename is in progress. A Unicode glyph was
 rejected for this: it would depend on the unifont fallback and on whatever resource pack the
 player has.
+
+## Opening the screen without a command
+
+The client cannot build the screen by itself, so `HomeKeybind` and `InventoryButton` both send
+`HomeActionPayload.OPEN` through `HomeRequest` and wait for the list to come back. Guard anything
+new the same way: `HomeRequest.available()` is false on a server without the mod, and the button
+is simply not added in that case rather than added and dead.
+
+The key mapping has no config option on purpose: it appears in Options, Controls like any other
+key, and clearing the binding there is how a player turns it off. `consumeClick()` is drained
+every tick, including on the title screen, so presses cannot queue up and fire later.
+
+`InventoryButton` re-checks the config on every `AFTER_INIT`, so toggling it applies the next
+time the inventory opens. It needs `leftPos` and `topPos`, which are protected with no getter,
+hence the one accessor mixin; the panel moves when the recipe book opens, so hard-coding the
+centred position would be wrong exactly when it is most visible.
 
 ## Tooltips
 
