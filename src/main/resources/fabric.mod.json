@@ -3,7 +3,7 @@
 	"id": "homegui",
 	"version": "${version}",
 	"name": "HomeGUI",
-	"description": "Your Minecraft homes, one click away. Save, manage, and teleport through a clean GUI.",
+	"description": "Set a home, come back anytime, and manage everything from a simple GUI.",
 	"authors": [
 		"Nighter"
 	],

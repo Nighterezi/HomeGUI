@@ -1,8 +1,8 @@
 # HomeGUI
 
-> Your Minecraft homes, one click away.
+> Set a home. Come back anytime.
 
-HomeGUI is a lightweight Fabric mod for Minecraft 26.2. Save, manage, and teleport to homes from a clean in-game screen—without taking commands away from vanilla clients.
+HomeGUI is a small Fabric mod for Minecraft 26.2 that lets you save places and return to them from a simple in-game screen. Vanilla clients can still use every command through chat.
 
 ## Highlights
 
