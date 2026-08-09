@@ -1,6 +1,6 @@
 # HomeGUI
 
-> Set a home. Come back anytime.
+> A simple sethome mod with a GUI for Fabric.
 
 HomeGUI is a small Fabric mod for Minecraft 26.2 that lets you save places and return to them from a simple in-game screen. Vanilla clients can still use every command through chat.
 

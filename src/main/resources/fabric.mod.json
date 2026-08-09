@@ -3,7 +3,7 @@
 	"id": "homegui",
 	"version": "${version}",
 	"name": "HomeGUI",
-	"description": "Set a home, come back anytime, and manage everything from a simple GUI.",
+	"description": "A simple sethome mod with a GUI for Fabric.",
 	"authors": [
 		"Nighter"
 	],
