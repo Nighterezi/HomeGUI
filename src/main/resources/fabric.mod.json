@@ -8,7 +8,11 @@
 	"authors": [
 		"Nighter"
 	],
-	"contact": {},
+	"contact": {
+		"homepage": "https://nighterezi.github.io/HomeGUI/",
+		"issues": "https://github.com/Nighterezi/HomeGUI/issues",
+		"sources": "https://github.com/Nighterezi/HomeGUI"
+	},
 	"license": "MIT",
 	"environment": "*",
 	"entrypoints": {

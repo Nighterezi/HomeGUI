@@ -1,5 +1,14 @@
 # Cài đặt
 
+## Tải về
+
+Lấy bản mới nhất trên Modrinth:
+
+[Tải HomeGUI trên Modrinth](https://modrinth.com/mod/homeguimod)
+
+Chọn file đúng với phiên bản Minecraft của bạn và tải `homegui-<phiên bản>.jar`. Không có trình
+cài đặt nào cả, file jar chính là toàn bộ mod.
+
 ## Yêu cầu
 
 | Thành phần | Phiên bản |

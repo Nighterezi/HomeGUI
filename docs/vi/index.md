@@ -12,6 +12,11 @@ hero:
       text: Bắt đầu
       link: /vi/docs/
     - theme: alt
+      text: Tải trên Modrinth
+      link: https://modrinth.com/mod/homeguimod
+      target: _blank
+      rel: external
+    - theme: alt
       text: Lệnh
       link: /vi/docs/commands
     - theme: alt

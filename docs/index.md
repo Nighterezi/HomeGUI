@@ -12,6 +12,11 @@ hero:
       text: Get Started
       link: /docs/
     - theme: alt
+      text: Download on Modrinth
+      link: https://modrinth.com/mod/homeguimod
+      target: _blank
+      rel: external
+    - theme: alt
       text: Commands
       link: /docs/commands
     - theme: alt

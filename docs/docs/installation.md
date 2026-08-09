@@ -1,5 +1,14 @@
 # Installation
 
+## Download
+
+Get the latest build from Modrinth:
+
+[Download HomeGUI on Modrinth](https://modrinth.com/mod/homeguimod)
+
+Pick the file that matches your Minecraft version and take the `homegui-<version>.jar`. There is
+no installer, the jar is the whole mod.
+
 ## Requirements
 
 | Thing | Version |
