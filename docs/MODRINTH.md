@@ -101,5 +101,3 @@ commands still work, and the server prints the list in chat instead of opening t
 - [Documentation](https://nighterezi.github.io/HomeGUI/)
 - [Source code](https://github.com/Nighterezi/HomeGUI)
 - [Issue tracker](https://github.com/Nighterezi/HomeGUI/issues)
-
-MIT licensed. Made by Nighter.
