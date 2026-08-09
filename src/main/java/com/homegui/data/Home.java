@@ -1,6 +1,6 @@
 package com.homegui.data;
 
-import java.util.Locale;
+import com.homegui.util.ColorCodes;
 
 /**
  * A saved home. This is a plain class rather than a record so Gson can still read files
@@ -32,8 +32,17 @@ public class Home {
 		this.createdAt = System.currentTimeMillis();
 	}
 
-	/** Map key: the lower cased name, so {@code /home House} finds {@code house}. */
+	/**
+	 * Map key: the name without colour markup, lower cased. That way {@code /home House}
+	 * finds {@code house}, and a home called {@code &ahouse} is still reachable by typing
+	 * plain {@code house}.
+	 */
 	public String key() {
-		return name == null ? "" : name.toLowerCase(Locale.ROOT);
+		return ColorCodes.key(name);
+	}
+
+	/** The name as it reads without any colour markup. */
+	public String plainName() {
+		return ColorCodes.strip(name);
 	}
 }

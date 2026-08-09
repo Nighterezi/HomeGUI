@@ -35,8 +35,10 @@ public final class HomeCommands {
 			return builder.buildFuture();
 		}
 
+		// Suggest names without their colour markup: that is what a player would type, and
+		// lookups ignore the markup anyway.
 		return SharedSuggestionProvider.suggest(
-				HomeManager.listOf(player.getUUID()).stream().map(home -> home.name),
+				HomeManager.listOf(player.getUUID()).stream().map(Home::plainName),
 				builder);
 	};
 
@@ -140,7 +142,7 @@ public final class HomeCommands {
 		Sounds.forgetWarnings();
 
 		CommandSourceStack source = context.getSource();
-		source.sendSuccess(() -> Localization.message(source, Lang.CONFIG_RELOADED), true);
+		source.sendSuccess(() -> Localization.prefixed(source, Lang.CONFIG_RELOADED), true);
 		return 1;
 	}
 

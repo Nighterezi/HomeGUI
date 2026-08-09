@@ -5,6 +5,9 @@ package com.homegui.lang;
  * contains user facing text; the wording itself lives in {@code assets/homegui/lang/*.json}.
  */
 public final class Lang {
+	/** Chat prefix put in front of every message sent to a player. */
+	public static final String PREFIX = "homegui.message.prefix";
+
 	public static final String HOME_SET = "homegui.message.home_set";
 	public static final String HOME_DELETED = "homegui.message.home_deleted";
 	public static final String HOME_RENAMED = "homegui.message.home_renamed";
@@ -27,13 +30,11 @@ public final class Lang {
 	public static final String GUI_TITLE = "homegui.gui.title";
 	public static final String GUI_EMPTY = "homegui.gui.empty";
 	public static final String GUI_PAGE = "homegui.gui.page";
-	public static final String GUI_ENTRY = "homegui.gui.entry";
-	public static final String GUI_ENTRY_TOOLTIP = "homegui.gui.entry_tooltip";
+	public static final String GUI_ENTRY_LOCATION = "homegui.gui.entry_location";
 	public static final String GUI_RENAME_TOOLTIP = "homegui.gui.rename_tooltip";
 	public static final String GUI_RENAME_HINT = "homegui.gui.rename_hint";
 	public static final String GUI_RENAME_CONFIRM = "homegui.gui.rename_confirm";
 	public static final String GUI_DELETE = "homegui.gui.delete";
-	public static final String GUI_DELETE_CONFIRM = "homegui.gui.delete_confirm";
 	public static final String GUI_DELETE_TOOLTIP = "homegui.gui.delete_tooltip";
 	public static final String GUI_DELETE_HINT = "homegui.gui.delete_hint";
 	public static final String GUI_NAME_FIELD = "homegui.gui.name_field";
@@ -59,6 +60,7 @@ public final class Lang {
 	public static final String CONFIG_ALLOW_OVERWRITE = "homegui.config.allow_overwrite";
 	public static final String CONFIG_OP_BYPASS_LIMITS = "homegui.config.op_bypass_limits";
 	public static final String CONFIG_OP_PERMISSION_LEVEL = "homegui.config.op_permission_level";
+	public static final String CONFIG_ALLOW_COLORS = "homegui.config.allow_colors_in_home_names";
 	public static final String CONFIG_MAX_HOME_NAME_LENGTH = "homegui.config.max_home_name_length";
 	public static final String CONFIG_GUI_ENTRIES_PER_PAGE = "homegui.config.gui_entries_per_page";
 	public static final String CONFIG_OPEN_GUI_ON_BARE_HOME = "homegui.config.open_gui_on_bare_home_command";

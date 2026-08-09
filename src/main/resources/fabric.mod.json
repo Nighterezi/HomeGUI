@@ -4,6 +4,7 @@
 	"version": "${version}",
 	"name": "HomeGUI",
 	"description": "A simple sethome mod with a GUI for Fabric.",
+	"icon": "assets/homegui/icon.png",
 	"authors": [
 		"Nighter"
 	],

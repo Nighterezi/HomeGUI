@@ -3,7 +3,9 @@ package com.homegui.client;
 import com.homegui.HomeGui;
 import com.homegui.lang.Lang;
 import com.homegui.net.HomeActionPayload;
+import com.homegui.util.ColorCodes;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -11,6 +13,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.SpriteIconButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -42,7 +45,8 @@ public class HomeScreen extends Screen {
 	private static final int TITLE_HEIGHT = 34;
 	private static final int ROW_GAP = 26;
 	private static final int TITLE_OFFSET = 10;
-	private static final int HINT_OFFSET = 14;
+	private static final int HINT_GAP = 5;
+	private static final int HINT_ROW_HEIGHT = 20;
 
 	/** Pencil icons stitched into the GUI atlas from assets/homegui/textures/gui/sprites. */
 	private static final Identifier PENCIL_SPRITE = HomeGui.id("icon/pencil");
@@ -72,6 +76,8 @@ public class HomeScreen extends Screen {
 	private int panelTop;
 	private int panelHeight;
 	private int listTop;
+	private int listRows;
+	private int hintY;
 
 	public HomeScreen(HomeListData data) {
 		super(Component.translatable(Lang.GUI_TITLE, data.homes().size(), data.maxHomes()));
@@ -111,19 +117,27 @@ public class HomeScreen extends Screen {
 	protected void init() {
 		opened = this;
 
-		int rows = data.perPage();
+		// A single page shrinks to the homes it actually holds; once there are several pages
+		// the height stays put so paging does not make the dialog jump around.
+		int rows = data.pageCount() > 1 ? data.perPage() : Math.max(1, data.homes().size());
 		int listHeight = rows * ROW_HEIGHT;
 
-		panelHeight = TITLE_HEIGHT + listHeight + WIDGET_GAP + ROW_GAP * 3;
+		panelHeight = TITLE_HEIGHT + listHeight + WIDGET_GAP + ROW_GAP * 3 + HINT_ROW_HEIGHT;
 		panelLeft = (this.width - PANEL_WIDTH) / 2;
 		panelTop = Math.max(WIDGET_GAP, (this.height - panelHeight) / 2);
 		listTop = panelTop + TITLE_HEIGHT;
 
 		int paginationTop = listTop + listHeight + WIDGET_GAP;
+		int footerTop = paginationTop + ROW_GAP;
+		int closeTop = footerTop + ROW_GAP;
+
+		// The hint sits under the Close button rather than over it.
+		hintY = closeTop + WIDGET_HEIGHT + HINT_GAP;
+		listRows = rows;
 
 		buildHomeRows();
 		buildPagination(paginationTop);
-		buildFooter(paginationTop + ROW_GAP);
+		buildFooter(footerTop, closeTop);
 	}
 
 	private void buildHomeRows() {
@@ -156,8 +170,10 @@ public class HomeScreen extends Screen {
 			rename.setTooltip(Tooltip.create(Component.translatable(Lang.GUI_RENAME_TOOLTIP)));
 			this.addRenderableWidget(rename);
 
-			Component deleteLabel = Component.translatable(
-					home.equals(pendingDelete) ? Lang.GUI_DELETE_CONFIRM : Lang.GUI_DELETE);
+			// Red once the delete is armed. The colour lives here rather than in the language
+			// file so translators only ever deal with wording.
+			Component deleteLabel = Component.translatable(Lang.GUI_DELETE)
+					.withStyle(home.equals(pendingDelete) ? ChatFormatting.RED : ChatFormatting.WHITE);
 
 			this.addRenderableWidget(Button.builder(deleteLabel, button -> onDeleteClicked(home))
 					.bounds(deleteX, y, ICON_BUTTON_WIDTH, WIDGET_HEIGHT)
@@ -185,7 +201,7 @@ public class HomeScreen extends Screen {
 				PAGE_BUTTON_WIDTH, WIDGET_HEIGHT).build());
 	}
 
-	private void buildFooter(int y) {
+	private void buildFooter(int y, int closeTop) {
 		nameField = new EditBox(this.font, panelLeft + PANEL_PADDING, y, NAME_FIELD_WIDTH, WIDGET_HEIGHT,
 				Component.translatable(Lang.GUI_NAME_FIELD));
 		nameField.setMaxLength(data.maxNameLength());
@@ -203,7 +219,7 @@ public class HomeScreen extends Screen {
 				.build());
 
 		this.addRenderableWidget(Button.builder(Component.translatable(Lang.GUI_CLOSE), button -> onClose())
-				.bounds(panelLeft + (PANEL_WIDTH - CLOSE_BUTTON_WIDTH) / 2, y + ROW_GAP,
+				.bounds(panelLeft + (PANEL_WIDTH - CLOSE_BUTTON_WIDTH) / 2, closeTop,
 						CLOSE_BUTTON_WIDTH, WIDGET_HEIGHT)
 				.build());
 	}
@@ -311,29 +327,38 @@ public class HomeScreen extends Screen {
 		if (data.pageCount() > 1) {
 			graphics.centeredText(this.font,
 					Component.translatable(Lang.GUI_PAGE, page + 1, data.pageCount()),
-					centerX, listTop + data.perPage() * ROW_HEIGHT + TITLE_OFFSET, COLOR_HINT);
+					centerX, listTop + listRows * ROW_HEIGHT + TITLE_OFFSET, COLOR_HINT);
 		}
 
-		int hintY = panelTop + panelHeight - HINT_OFFSET;
-
 		if (renaming != null) {
-			graphics.centeredText(this.font, Component.translatable(Lang.GUI_RENAME_HINT, renaming),
+			graphics.centeredText(this.font,
+					Component.translatable(Lang.GUI_RENAME_HINT, ColorCodes.parse(renaming)),
 					centerX, hintY, COLOR_HINT);
 		} else if (pendingDelete != null) {
-			graphics.centeredText(this.font, Component.translatable(Lang.GUI_DELETE_HINT, pendingDelete),
+			graphics.centeredText(this.font,
+					Component.translatable(Lang.GUI_DELETE_HINT, ColorCodes.parse(pendingDelete)),
 					centerX, hintY, COLOR_WARNING);
 		}
 	}
 
+	/** The button shows the name exactly as the player styled it. */
 	private Component labelFor(HomeListData.Entry entry) {
-		return Component.translatable(Lang.GUI_ENTRY, entry.name());
+		return ColorCodes.parse(entry.name());
 	}
 
+	/**
+	 * The name keeps its own colours, while the position lines are greyed as a whole. Colouring
+	 * them with codes inside the template would not work: a translation argument starts a new
+	 * child component, so the code would stop applying at the first placeholder.
+	 */
 	private Component tooltipFor(HomeListData.Entry entry) {
-		return Component.translatable(Lang.GUI_ENTRY_TOOLTIP,
-				entry.name(),
-				shortDimension(entry.dimension()),
-				coordinate(entry.x()), coordinate(entry.y()), coordinate(entry.z()));
+		return Component.empty()
+				.append(ColorCodes.parse(entry.name()))
+				.append(CommonComponents.NEW_LINE)
+				.append(Component.translatable(Lang.GUI_ENTRY_LOCATION,
+								shortDimension(entry.dimension()),
+								coordinate(entry.x()), coordinate(entry.y()), coordinate(entry.z()))
+						.withStyle(ChatFormatting.GRAY));
 	}
 
 	/** {@code minecraft:the_nether} reads better as {@code the_nether} on a button. */

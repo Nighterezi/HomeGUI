@@ -21,6 +21,9 @@ public class HomeGuiConfig {
 	/** Upper bound for {@link #guiEntriesPerPage}, so a bad value cannot produce an unusable screen. */
 	private static final int MAX_ENTRIES_PER_PAGE = 10;
 
+	/** Head room for the colour codes wrapped around a name of the maximum visible length. */
+	private static final int COLOR_MARKUP_ALLOWANCE = 64;
+
 	/** Above 1 the sound simply carries further, so there is no point going very high. */
 	private static final float MAX_SOUND_VOLUME = 4.0F;
 	private static final float MIN_SOUND_PITCH = 0.5F;
@@ -61,8 +64,14 @@ public class HomeGuiConfig {
 	/** Permission level treated as operator, from 0 (everyone) to 4 (owner). */
 	public int opPermissionLevel = 2;
 
-	/** Maximum length of a home name. */
+	/** Maximum length of a home name, counted without any colour markup. */
 	public int maxHomeNameLength = 24;
+
+	/**
+	 * Whether players may colour their home names with {@code &} or {@code §} codes and
+	 * {@code &#RRGGBB}. When off, any markup is quietly removed instead of rejected.
+	 */
+	public boolean allowColorsInHomeNames = true;
 
 	/** How many homes one page of the GUI shows. */
 	public int guiEntriesPerPage = 6;
@@ -88,6 +97,14 @@ public class HomeGuiConfig {
 
 	public static HomeGuiConfig get() {
 		return instance;
+	}
+
+	/**
+	 * Longest name accepted as typed, markup included. {@link #maxHomeNameLength} counts only
+	 * the visible characters, so the input needs extra room for the codes around them.
+	 */
+	public int nameInputLimit() {
+		return maxHomeNameLength + COLOR_MARKUP_ALLOWANCE;
 	}
 
 	private static Path configPath() {

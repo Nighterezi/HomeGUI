@@ -2,6 +2,7 @@ package com.homegui.client;
 
 import com.homegui.config.HomeGuiConfig;
 import com.homegui.lang.Lang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -81,6 +82,8 @@ public class ConfigScreen extends Screen {
 				value -> config.opBypassLimits = value));
 		options.add(new IntegerOption(Lang.CONFIG_OP_PERMISSION_LEVEL, config.opPermissionLevel,
 				value -> config.opPermissionLevel = value));
+		options.add(new BooleanOption(Lang.CONFIG_ALLOW_COLORS, config.allowColorsInHomeNames,
+				value -> config.allowColorsInHomeNames = value));
 		options.add(new IntegerOption(Lang.CONFIG_MAX_HOME_NAME_LENGTH, config.maxHomeNameLength,
 				value -> config.maxHomeNameLength = value));
 		options.add(new IntegerOption(Lang.CONFIG_GUI_ENTRIES_PER_PAGE, config.guiEntriesPerPage,
@@ -266,7 +269,9 @@ public class ConfigScreen extends Screen {
 		}
 
 		private Component label() {
-			return Component.translatable(value ? Lang.CONFIG_ENABLED : Lang.CONFIG_DISABLED);
+			return value
+					? Component.translatable(Lang.CONFIG_ENABLED).withStyle(ChatFormatting.GREEN)
+					: Component.translatable(Lang.CONFIG_DISABLED).withStyle(ChatFormatting.RED);
 		}
 
 		@Override

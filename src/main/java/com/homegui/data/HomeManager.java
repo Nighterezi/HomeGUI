@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.homegui.HomeGui;
+import com.homegui.util.ColorCodes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
 
@@ -14,7 +15,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -67,7 +67,7 @@ public final class HomeManager {
 			return null;
 		}
 
-		return homesOf(playerId).get(name.toLowerCase(Locale.ROOT));
+		return homesOf(playerId).get(ColorCodes.key(name));
 	}
 
 	public static int count(UUID playerId) {
@@ -87,7 +87,7 @@ public final class HomeManager {
 	 */
 	public static void rename(UUID playerId, String oldName, String newName) {
 		LinkedHashMap<String, Home> homes = homesOf(playerId);
-		String oldKey = oldName.toLowerCase(Locale.ROOT);
+		String oldKey = ColorCodes.key(oldName);
 		Home home = homes.get(oldKey);
 
 		if (home == null) {
@@ -122,7 +122,7 @@ public final class HomeManager {
 			return false;
 		}
 
-		boolean removed = homesOf(playerId).remove(name.toLowerCase(Locale.ROOT)) != null;
+		boolean removed = homesOf(playerId).remove(ColorCodes.key(name)) != null;
 
 		if (removed) {
 			save(playerId);

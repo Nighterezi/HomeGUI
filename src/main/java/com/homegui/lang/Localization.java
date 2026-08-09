@@ -3,10 +3,13 @@ package com.homegui.lang;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.homegui.HomeGui;
+import com.homegui.util.ColorCodes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.io.InputStream;
@@ -120,6 +123,22 @@ public final class Localization {
 		return message(languageOf(player), key, args);
 	}
 
+	/** The same, with the mod's chat prefix in front. Used for everything sent to chat. */
+	public static Component prefixed(ServerPlayer player, String key, Object... args) {
+		return prefixed(languageOf(player), key, args);
+	}
+
+	public static Component prefixed(CommandSourceStack source, String key, Object... args) {
+		ServerPlayer player = source.getPlayer();
+		return prefixed(player != null ? languageOf(player) : DEFAULT_LANGUAGE, key, args);
+	}
+
+	private static Component prefixed(String language, String key, Object... args) {
+		return Component.empty()
+				.append(message(language, Lang.PREFIX))
+				.append(message(language, key, args));
+	}
+
 	/**
 	 * Translates a message for a command source. Console and command blocks have no client
 	 * language, so they fall back to {@link #DEFAULT_LANGUAGE}.
@@ -130,7 +149,7 @@ public final class Localization {
 	}
 
 	public static Component message(String language, String key, Object... args) {
-		return Component.literal(format(lookup(language, key), key, args));
+		return format(lookup(language, key), args);
 	}
 
 	/** The language code reported by the player's client, for example {@code vi_vn}. */
@@ -176,18 +195,69 @@ public final class Localization {
 		return TABLES.getOrDefault(DEFAULT_LANGUAGE, Map.of());
 	}
 
-	private static String format(String template, String key, Object... args) {
+	/**
+	 * Fills the {@code %s} placeholders in a template.
+	 *
+	 * <p>This is done by hand rather than with {@code String.format} because an argument may be
+	 * a styled {@link Component}, such as a home name that carries colour codes. Each piece of
+	 * the template becomes its own child component, so the colour that was active at the end of
+	 * one piece is carried into the next one; without that, a {@code §7} at the start of a line
+	 * would stop applying at the first placeholder.
+	 */
+	private static Component format(String template, Object... args) {
 		if (args.length == 0) {
-			return template;
+			return ColorCodes.parse(template);
 		}
 
-		try {
-			return String.format(Locale.ROOT, template, args);
-		} catch (Exception e) {
-			// A hand edited language file can easily get the placeholders wrong; printing the
-			// raw line is friendlier than throwing while handling a command.
-			HomeGui.LOGGER.warn("Translation {} has malformed placeholders", key);
-			return template;
+		MutableComponent result = Component.empty();
+		StringBuilder pending = new StringBuilder();
+		Style style = Style.EMPTY;
+		int argIndex = 0;
+
+		for (int index = 0; index < template.length(); index++) {
+			char current = template.charAt(index);
+
+			if (current == '%' && index + 1 < template.length()) {
+				char next = template.charAt(index + 1);
+
+				if (next == 's' && argIndex < args.length) {
+					style = flush(result, pending, style);
+					result.append(argument(args[argIndex++], style));
+					index++;
+					continue;
+				}
+
+				if (next == '%') {
+					pending.append('%');
+					index++;
+					continue;
+				}
+			}
+
+			pending.append(current);
 		}
+
+		flush(result, pending, style);
+		return result;
+	}
+
+	/** Appends the pending text and returns the style left in effect after it. */
+	private static Style flush(MutableComponent target, StringBuilder pending, Style style) {
+		if (pending.isEmpty()) {
+			return style;
+		}
+
+		String text = pending.toString();
+		pending.setLength(0);
+		target.append(ColorCodes.parse(text, style));
+		return ColorCodes.styleAfter(style, text);
+	}
+
+	private static Component argument(Object argument, Style style) {
+		if (argument instanceof Component component) {
+			return component;
+		}
+
+		return Component.literal(String.valueOf(argument)).withStyle(style);
 	}
 }

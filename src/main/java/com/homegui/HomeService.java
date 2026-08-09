@@ -9,6 +9,7 @@ import com.homegui.data.HomeManager;
 import com.homegui.lang.Lang;
 import com.homegui.lang.Localization;
 import com.homegui.net.HomeListPayload;
+import com.homegui.util.ColorCodes;
 import com.homegui.util.Permissions;
 import com.homegui.util.Sounds;
 import com.homegui.util.TeleportHelper;
@@ -73,11 +74,15 @@ public final class HomeService {
 			return false;
 		}
 
+		if (!config.allowColorsInHomeNames) {
+			name = ColorCodes.strip(name);
+		}
+
 		UUID id = player.getUUID();
 		Home existing = HomeManager.find(id, name);
 
 		if (existing != null && !config.allowOverwrite) {
-			send(player, Lang.HOME_ALREADY_EXISTS, name);
+			send(player, Lang.HOME_ALREADY_EXISTS, ColorCodes.parse(name));
 			return false;
 		}
 
@@ -93,7 +98,7 @@ public final class HomeService {
 				player.getYRot(), player.getXRot()
 		));
 
-		send(player, Lang.HOME_SET, name, HomeManager.count(id), config.maxHomes);
+		send(player, Lang.HOME_SET, ColorCodes.parse(name), HomeManager.count(id), config.maxHomes);
 		return true;
 	}
 
@@ -104,12 +109,12 @@ public final class HomeService {
 		Home home = HomeManager.find(player.getUUID(), name);
 
 		if (home == null) {
-			send(player, Lang.HOME_NOT_FOUND, name);
+			send(player, Lang.HOME_NOT_FOUND, ColorCodes.parse(name));
 			return false;
 		}
 
 		HomeManager.remove(player.getUUID(), name);
-		send(player, Lang.HOME_DELETED, home.name);
+		send(player, Lang.HOME_DELETED, ColorCodes.parse(home.name));
 		return true;
 	}
 
@@ -129,8 +134,12 @@ public final class HomeService {
 		Home home = HomeManager.find(id, oldName);
 
 		if (home == null) {
-			send(player, Lang.HOME_NOT_FOUND, oldName);
+			send(player, Lang.HOME_NOT_FOUND, ColorCodes.parse(oldName));
 			return false;
+		}
+
+		if (!config.allowColorsInHomeNames) {
+			newName = ColorCodes.strip(newName);
 		}
 
 		if (!isValidName(newName)) {
@@ -141,13 +150,13 @@ public final class HomeService {
 		Home clash = HomeManager.find(id, newName);
 
 		if (clash != null && clash != home) {
-			send(player, Lang.HOME_ALREADY_EXISTS, newName);
+			send(player, Lang.HOME_ALREADY_EXISTS, ColorCodes.parse(newName));
 			return false;
 		}
 
 		String previousName = home.name;
 		HomeManager.rename(id, oldName, newName);
-		send(player, Lang.HOME_RENAMED, previousName, newName);
+		send(player, Lang.HOME_RENAMED, ColorCodes.parse(previousName), ColorCodes.parse(newName));
 		return true;
 	}
 
@@ -159,7 +168,7 @@ public final class HomeService {
 		Home home = HomeManager.find(player.getUUID(), name);
 
 		if (home == null) {
-			send(player, Lang.HOME_NOT_FOUND, name);
+			send(player, Lang.HOME_NOT_FOUND, ColorCodes.parse(name));
 			return false;
 		}
 
@@ -193,7 +202,7 @@ public final class HomeService {
 					System.currentTimeMillis() + config.teleportWarmupSeconds * MILLIS_PER_SECOND,
 					player.position()
 			));
-			send(player, Lang.WARMUP_STARTED, home.name);
+			send(player, Lang.WARMUP_STARTED, ColorCodes.parse(home.name));
 			return true;
 		}
 
@@ -213,7 +222,7 @@ public final class HomeService {
 
 		Sounds.playTo(player, config.teleportSound,
 				config.teleportSoundVolume, config.teleportSoundPitch);
-		send(player, Lang.HOME_TELEPORTED, home.name);
+		send(player, Lang.HOME_TELEPORTED, ColorCodes.parse(home.name));
 	}
 
 	/** Called every server tick to advance the teleports that are counting down. */
@@ -251,7 +260,7 @@ public final class HomeService {
 			Home home = HomeManager.find(player.getUUID(), pending.homeName);
 
 			if (home == null) {
-				send(player, Lang.HOME_NOT_FOUND, pending.homeName);
+				send(player, Lang.HOME_NOT_FOUND, ColorCodes.parse(pending.homeName));
 				return true;
 			}
 
@@ -306,7 +315,7 @@ public final class HomeService {
 
 		for (Home home : homes) {
 			send(player, Lang.LIST_ENTRY,
-					home.name,
+					ColorCodes.parse(home.name),
 					shortDimension(home.dimension),
 					coordinate(home.x), coordinate(home.y), coordinate(home.z));
 		}
@@ -340,7 +349,7 @@ public final class HomeService {
 		root.addProperty("open", open);
 		root.addProperty("maxHomes", config.maxHomes);
 		root.addProperty("perPage", config.guiEntriesPerPage);
-		root.addProperty("maxNameLength", config.maxHomeNameLength);
+		root.addProperty("maxNameLength", config.nameInputLimit());
 		root.addProperty("currentDimension", player.level().dimension().identifier().toString());
 
 		JsonArray array = new JsonArray();
@@ -377,18 +386,27 @@ public final class HomeService {
 		return trimmed.isEmpty() ? HomeGuiConfig.get().defaultHomeName : trimmed;
 	}
 
+	/**
+	 * Length and content are checked against the name as it reads on screen, so colour markup
+	 * does not eat into the player's character budget.
+	 */
 	private static boolean isValidName(String name) {
 		HomeGuiConfig config = HomeGuiConfig.get();
+		String plain = ColorCodes.strip(name);
 
-		if (name.isEmpty() || name.length() > config.maxHomeNameLength) {
+		if (plain.isBlank() || plain.length() > config.maxHomeNameLength) {
 			return false;
 		}
 
-		for (int i = 0; i < name.length(); i++) {
-			char c = name.charAt(i);
+		if (name.length() > config.nameInputLimit()) {
+			return false;
+		}
 
-			// Spaces are allowed, but the section sign would let players smuggle colour codes
-			// into their home names, and control characters would corrupt the chat listing.
+		for (int i = 0; i < plain.length(); i++) {
+			char c = plain.charAt(i);
+
+			// Spaces are fine. A section sign left over after the codes were stripped is not
+			// part of a valid code, and control characters would corrupt the chat listing.
 			if (c == SECTION_SIGN || Character.isISOControl(c)) {
 				return false;
 			}
@@ -431,6 +449,6 @@ public final class HomeService {
 	}
 
 	private static void send(ServerPlayer player, String key, Object... args) {
-		player.sendSystemMessage(Localization.message(player, key, args));
+		player.sendSystemMessage(Localization.prefixed(player, key, args));
 	}
 }

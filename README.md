@@ -28,7 +28,9 @@ Install HomeGUI on the server or in single player. The client mod is optional, b
 | `/homes` | Open or list your homes |
 | `/homegui reload` | Reload config and translations |
 
-Home names can contain spaces.
+Home names can contain spaces and colour codes. Use `&` or `§` for the vanilla codes and
+`&#RRGGBB` for any other colour; the limit counts visible characters only, and lookups ignore
+the markup, so `/home base` still finds a home named `&#55FFAAbase`.
 
 ## Configure
 
