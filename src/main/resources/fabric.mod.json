@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "homegui",
+	"version": "${version}",
+	"name": "HomeGUI",
+	"description": "Your Minecraft homes, one click away. Save, manage, and teleport through a clean GUI.",
+	"authors": [
+		"Nighter"
+	],
+	"contact": {},
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.homegui.HomeGui"
+		],
+		"client": [
+			"com.homegui.client.HomeGuiClient"
+		],
+		"modmenu": [
+			"com.homegui.client.HomeGuiModMenu"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
