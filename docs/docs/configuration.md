@@ -12,6 +12,10 @@ The Mod Menu screen edits **your** config file. On a dedicated server the server
 what applies, so changing it on your client will not change anything for other players.
 :::
 
+![The Mod Menu settings screen, first page](/screenshots/config-page-1.png)
+
+![The Mod Menu settings screen, second page](/screenshots/config-page-2.png)
+
 ## Homes
 
 ### maxHomes

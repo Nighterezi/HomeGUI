@@ -25,6 +25,8 @@ Không có tuỳ chọn nào trong config cho phím này. Muốn tắt thì xoá
 Mặc định tắt. Bật bằng `showInventoryButton`, khi đó một nút hình ngôi nhà nhỏ hiện ra bên phải
 khung túi đồ lúc bạn mở nó. Nút bám theo khung, nên mở sổ công thức cũng không làm nó lạc chỗ.
 
+![Nút hình ngôi nhà cạnh túi đồ sinh tồn, kèm chú thích](/screenshots/inventory-button.png)
+
 Thay đổi có hiệu lực ngay lần mở túi đồ kế tiếp, không cần khởi động lại.
 
 Chỉ túi đồ chế độ sinh tồn mới có nút này. Menu creative thì không.

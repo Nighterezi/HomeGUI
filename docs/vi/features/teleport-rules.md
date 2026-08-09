@@ -24,6 +24,8 @@ ngược không bị tính vào đó.
 để dịch chuyển ngay khi gõ lệnh. Số giây còn lại hiện trên
 action bar và giảm mỗi giây, kèm một tiếng động mỗi lần.
 
+![Đồng hồ đếm ngược trên action bar trong lúc chờ dịch chuyển](/screenshots/teleport-warmup.png)
+
 Khi `cancelWarmupOnMove` bật, đi khỏi chỗ là huỷ. `warmupMoveTolerance` quyết định bao xa thì bị
 tính, tính bằng block; mặc định `0.5` đủ để bỏ qua mấy cái xê dịch nhỏ khi bạn đứng trên slab hoặc
 bị mob đẩy.

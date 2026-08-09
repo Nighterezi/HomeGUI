@@ -9,6 +9,8 @@ Tên home có thể chứa khoảng trắng, nên tên luôn là phần cuối c
 
 Tên cũng được gợi ý bằng phím Tab, và gợi ý hiện tên không kèm mã màu.
 
+![Tin nhắn chat của /sethome và /home, kèm đồng hồ đếm ngược](/screenshots/chat-commands.png)
+
 ## Lệnh cho người chơi
 
 ### /sethome

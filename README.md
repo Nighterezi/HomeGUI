@@ -12,6 +12,28 @@ HomeGUI is a small Fabric mod for Minecraft 26.2 that lets you save places and r
 - English and Vietnamese built in
 - Optional Mod Menu integration
 
+## Screenshots
+
+Every home on one screen. Hover a row for its dimension and coordinates.
+
+![The home screen listing eight homes](docs/public/screenshots/home-screen.png)
+
+| Rename in place | Delete with a confirmation |
+|---|---|
+| ![Renaming a home](docs/public/screenshots/rename-home.png) | ![Deleting a home](docs/public/screenshots/delete-home.png) |
+
+The house button beside the inventory, and the warmup counting down on the action bar.
+
+| Inventory button | Teleport warmup |
+|---|---|
+| ![The house button beside the inventory](docs/public/screenshots/inventory-button.png) | ![The warmup countdown](docs/public/screenshots/teleport-warmup.png) |
+
+Settings, with Mod Menu installed.
+
+| Page 1 | Page 2 |
+|---|---|
+| ![Settings page 1](docs/public/screenshots/config-page-1.png) | ![Settings page 2](docs/public/screenshots/config-page-2.png) |
+
 ## Install
 
 Requires Java 25, Fabric Loader 0.19.3+, and Fabric API.

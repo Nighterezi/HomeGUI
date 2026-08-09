@@ -38,3 +38,13 @@ features:
     details: English and Vietnamese, picked automatically.
     link: /docs/translations
 ---
+
+## In game
+
+Every home on one screen. Click a row to go, the pencil to rename, `X` twice to delete.
+
+![The home screen listing eight homes](/screenshots/home-screen-plain.png)
+
+Prefer chat? Every command still works, on any client.
+
+![Chat replies from /sethome and /home](/screenshots/chat-commands.png)

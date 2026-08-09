@@ -3,6 +3,8 @@
 `/home` không kèm tên sẽ mở nó, `/homes` cũng vậy. Nếu client của bạn có cài mod thì còn bấm được phím **H** hoặc nút hình ngôi nhà cạnh túi đồ; xem
 [Mở màn hình](/vi/docs/opening-the-screen).
 
+![Màn hình home, kèm chú thích cho biết home nằm ở thế giới nào và toạ độ bao nhiêu](/screenshots/home-screen.png)
+
 ## Mỗi home một dòng
 
 | Nút | Tác dụng |
@@ -19,6 +21,8 @@ và toạ độ bao nhiêu.
 Bấm cây viết. Tên hiện tại được nạp vào ô bên dưới, icon sáng lên, và nút **Đặt nhà** đổi thành
 **Đổi tên**. Sửa tên, bấm Đổi tên, xong.
 
+![Đang đổi tên một home, mã màu hiện rõ trong ô nhập tên](/screenshots/rename-home.png)
+
 Bấm cây viết lần nữa là huỷ. Đóng màn hình cũng vậy.
 
 Đổi tên giữ nguyên home ở đúng chỗ, cả trong thế giới lẫn trong danh sách. Đổi trùng tên với một
@@ -28,6 +32,8 @@ home khác sẽ bị từ chối chứ không âm thầm ghi đè.
 
 Cú bấm đầu tiên vào `X` sẽ kích hoạt và chuyển nút sang màu đỏ, kèm một dòng bên dưới cho biết
 home nào sắp bị xoá. Bấm lần thứ hai là xoá. Bấm chỗ khác hoặc lật trang sẽ huỷ.
+
+![Một dòng đã kích hoạt xoá, kèm dòng xác nhận bên dưới các nút](/screenshots/delete-home.png)
 
 ## Thêm home
 

@@ -23,6 +23,8 @@ thì `/home` vẫn chạy và in danh sách ra chat.
 Nếu bạn cài Mod Menu, HomeGUI sẽ có nút Config trong danh sách Mods để chỉnh cấu hình ngay trong
 game. Đây hoàn toàn là tuỳ chọn, không cài mod vẫn chạy tốt.
 
+![HomeGUI trong danh sách Mod Menu, nút Config nằm ở góc trên bên phải](/screenshots/mod-menu.png)
+
 ## Lần chạy đầu tiên
 
 Khởi động game một lần. HomeGUI sẽ tạo `config/homegui.json` với giá trị mặc định, và tạo thư mục

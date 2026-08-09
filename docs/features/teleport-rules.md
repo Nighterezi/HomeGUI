@@ -24,6 +24,8 @@ count against it.
 Set it to `0` to teleport the moment the command is run. The remaining seconds
 appear on the action bar and tick down once a second, with a sound each time.
 
+![The countdown on the action bar during a warmup](/screenshots/teleport-warmup.png)
+
 With `cancelWarmupOnMove` on, walking away cancels it. `warmupMoveTolerance` decides how far is
 too far, in blocks; the default of `0.5` allows for the small drift you get from standing on a
 slab or being nudged by a mob.

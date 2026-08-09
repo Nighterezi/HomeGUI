@@ -3,6 +3,8 @@
 `/home` with no name opens it, and so does `/homes`. With the mod on your client you can also press **H** or click the house button beside your inventory; see
 [Opening the Screen](/docs/opening-the-screen).
 
+![The home screen, with a tooltip showing a home's dimension and coordinates](/screenshots/home-screen.png)
+
 ## A row per home
 
 Each home is one row.
@@ -21,6 +23,8 @@ dimension the home is in and its coordinates.
 Click the pencil. The current name is loaded into the field at the bottom, the icon lights up,
 and the **Set Home** button becomes **Rename**. Edit the name, press Rename, done.
 
+![Renaming a home, with its colour codes visible in the name field](/screenshots/rename-home.png)
+
 Clicking the pencil again cancels. So does closing the screen.
 
 A rename keeps the home exactly where it is, both in the world and in the list. Renaming onto a
@@ -30,6 +34,8 @@ name another home already uses is refused rather than quietly replacing it.
 
 The first click on `X` arms it and turns it red, and a line under the buttons says which home is
 about to go. A second click deletes it. Clicking anything else, or paging, disarms it.
+
+![A delete armed on one row, with the confirmation line below the buttons](/screenshots/delete-home.png)
 
 ## Adding a home
 

@@ -9,6 +9,8 @@ Home names may contain spaces, so the name is always the last thing on the line.
 
 Names are also tab completed, and tab completion shows them without any colour codes.
 
+![Chat replies from /sethome and /home, with the warmup counting down](/screenshots/chat-commands.png)
+
 ## Player commands
 
 ### /sethome

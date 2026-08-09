@@ -23,6 +23,8 @@ Installing it on the client as well is optional but recommended. With the mod on
 If Mod Menu is installed, HomeGUI gets a Config button in the Mods list so you can change
 settings in game. It is entirely optional, and the mod runs fine without it.
 
+![HomeGUI in the Mod Menu list, with the Config button top right](/screenshots/mod-menu.png)
+
 ## First run
 
 Start the game once. HomeGUI writes `config/homegui.json` with the defaults, and creates a

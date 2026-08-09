@@ -12,6 +12,10 @@ Màn hình Mod Menu sửa file config **của bạn**. Trên server riêng thì 
 hiệu lực, nên sửa ở client sẽ không thay đổi gì với người chơi khác.
 :::
 
+![Màn hình cấu hình trong Mod Menu, trang một](/screenshots/config-page-1.png)
+
+![Màn hình cấu hình trong Mod Menu, trang hai](/screenshots/config-page-2.png)
+
 ## Home
 
 ### maxHomes

@@ -38,3 +38,14 @@ features:
     details: Tiếng Anh và tiếng Việt, tự nhận diện.
     link: /vi/docs/translations
 ---
+
+## Trong game
+
+Mọi home nằm gọn trên một màn hình. Bấm vào dòng để đi, bấm cây viết để đổi tên, bấm `X` hai lần
+để xoá.
+
+![Màn hình home đang liệt kê tám home](/screenshots/home-screen-plain.png)
+
+Thích gõ lệnh hơn? Mọi lệnh vẫn chạy, trên bất kỳ client nào.
+
+![Tin nhắn chat của /sethome và /home](/screenshots/chat-commands.png)

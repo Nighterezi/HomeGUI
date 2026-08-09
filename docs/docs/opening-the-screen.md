@@ -26,6 +26,8 @@ Off by default. Turn it on with `showInventoryButton`, and a small house button 
 right of your inventory panel while it is open. It follows the panel, so opening the recipe book
 does not leave it stranded.
 
+![The house button beside the survival inventory, with its tooltip showing](/screenshots/inventory-button.png)
+
 The change applies the next time you open your inventory; no restart needed.
 
 Only the survival inventory gets the button. The creative menu does not.
